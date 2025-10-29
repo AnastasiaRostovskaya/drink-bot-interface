@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Виды напитков</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="inner">
+            <!-- Блок для Кофе -->
+            <div class="item">
+                <img src="images/coffee.png" alt="Кофе" class="img">
+                <button class="btn" id="btn1">Кофе</button>
+            </div>
+            <!-- Блок для Чая -->
+            <div class="item">
+                <img src="images/tea.png" alt="Чай" class="img">
+                <button class="btn" id="btn2">Чай</button>
+            </div>
+            <!-- Блок для Сока -->
+            <div class="item">
+                <img src="images/juice.png" alt="Сок" class="img">
+                <button class="btn" id="btn3">Сок</button>
+            </div>
+            <!-- Блок для Лимонада -->
+            <div class="item">
+                <img src="images/lemonade.png" alt="Лимонад" class="img">
+                <button class="btn" id="btn4">Лимонад</button>
+            </div>
+        </div>
+        <!-- Это место для отображения информации о напитке (можно скрыть до нажатия) -->
+        <div class="usercard" id="usercard"></div>
+    </div>
+
+    <!-- Подключаем библиотеку Telegram Web App -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <!-- Подключаем наш скрипт -->
+    <script src="app.js"></script>
+</body>
+</html>
