@@ -8,35 +8,32 @@
 </head>
 <body>
     <div class="container">
+        <h1>🍹 Выберите напиток</h1>
         <div class="inner">
-            <!-- Блок для Кофе -->
             <div class="item">
-                <img src="coffee.png" alt="Кофе" class="img">
+                <img src="./images/coffee.png" alt="Кофе" class="img">
                 <button class="btn" id="btn1">Кофе</button>
             </div>
-            <!-- Блок для Чая -->
             <div class="item">
-                <img src="tea.png" alt="Чай" class="img">
+                <img src="./images/tea.png" alt="Чай" class="img">
                 <button class="btn" id="btn2">Чай</button>
             </div>
-            <!-- Блок для Сока -->
             <div class="item">
-                <img src="juice.png" alt="Сок" class="img">
+                <img src="./images/juice.png" alt="Сок" class="img">
                 <button class="btn" id="btn3">Сок</button>
             </div>
-            <!-- Блок для Лимонада -->
             <div class="item">
-                <img src="lemonade.png" alt="Лимонад" class="img">
-                <button class="btn" id="btn4">Лимонад</button>
+                <img src="./images/lemonade.png" alt="Лимонад" class="img">
+                <button class="btn" id="btn4">Лимонаде</button>
             </div>
         </div>
-        <!-- Это место для отображения информации о напитке (можно скрыть до нажатия) -->
-        <div class="usercard" id="usercard"></div>
+
+        <div class="status" id="status">
+            Выберите напиток и нажмите кнопку внизу
+        </div>
     </div>
 
-    <!-- Подключаем библиотеку Telegram Web App -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Подключаем наш скрипт -->
     <script src="app.js"></script>
 </body>
 </html>

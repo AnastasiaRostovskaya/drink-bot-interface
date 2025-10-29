@@ -1,46 +1,80 @@
 // Получаем объект Telegram Web App
 let tg = window.Telegram.WebApp;
 
-// Расширяем окно на весь экран
+// Инициализируем WebApp
 tg.expand();
+tg.enableClosingConfirmation();
 
 // Настраиваем главную кнопку
+tg.MainButton.setText("Узнать о выбранном напитке");
 tg.MainButton.textColor = "#FFFFFF";
 tg.MainButton.color = "#6F4E37";
 
 // Переменная для хранения выбранного напитка
 let selectedDrink = "";
 
-// Получаем наши кнопки из HTML
-let btn1 = document.getElementById("btn1");
-let btn2 = document.getElementById("btn2");
-let btn3 = document.getElementById("btn3");
-let btn4 = document.getElementById("btn4");
-
-// Функция для обработки нажатия на кнопку напитка
-function handleDrinkClick(button, drinkId, drinkName) {
-    button.addEventListener("click", function () {
-        // Скрываем главную кнопку если она уже отображается
-        if (tg.MainButton.isVisible) {
-            tg.MainButton.hide();
-        } else {
-            // Устанавливаем текст главной кнопки и запоминаем выбор
-            tg.MainButton.setText(`Узнать о ${drinkName.toLowerCase()}`);
-            selectedDrink = drinkId;
-            tg.MainButton.show();
-        }
-    });
+// Функция для обновления состояния главной кнопки
+function updateMainButton() {
+    if (selectedDrink) {
+        tg.MainButton.show();
+    } else {
+        tg.MainButton.hide();
+    }
 }
 
-// Назначаем обработчики для всех кнопок
-handleDrinkClick(btn1, "1", "кофе");
-handleDrinkClick(btn2, "2", "чае");
-handleDrinkClick(btn3, "3", "соке");
-handleDrinkClick(btn4, "4", "лимонаде");
+// Функция для выбора напитка
+function selectDrink(drinkId, drinkName) {
+    selectedDrink = drinkId;
+
+    // Убираем активный класс со всех кнопок
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // Добавляем активный класс к выбранной кнопке
+    event.target.classList.add('active');
+
+    // Обновляем текст главной кнопки
+    tg.MainButton.setText(`Узнать о ${drinkName}`);
+
+    // Показываем главную кнопку
+    updateMainButton();
+
+    console.log("Выбран напиток:", drinkId, drinkName);
+}
+
+// Назначаем обработчики для кнопок
+document.getElementById("btn1").addEventListener("click", function() {
+    selectDrink("1", "кофе");
+});
+
+document.getElementById("btn2").addEventListener("click", function() {
+    selectDrink("2", "чае");
+});
+
+document.getElementById("btn3").addEventListener("click", function() {
+    selectDrink("3", "соке");
+});
+
+document.getElementById("btn4").addEventListener("click", function() {
+    selectDrink("4", "лимонаде");
+});
 
 // Обработчик нажатия на главную кнопку Telegram
-Telegram.WebApp.onEvent("mainButtonClicked", function () {
-    console.log("Отправляем данные:", selectedDrink);
-    // Отправляем данные (ID напитка) обратно в бота
-    tg.sendData(selectedDrink);
+tg.MainButton.onClick(function() {
+    if (selectedDrink) {
+        console.log("Отправляем данные в бота:", selectedDrink);
+
+        // Отправляем данные обратно в бота
+        tg.sendData(selectedDrink);
+
+        // Можно закрыть веб-приложение после отправки
+        // tg.close();
+    } else {
+        console.log("Напиток не выбран");
+    }
 });
+
+// Инициализация - скрываем кнопку при загрузке
+updateMainButton();
+console.log("WebApp инициализирован");
